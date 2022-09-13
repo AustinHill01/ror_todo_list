@@ -1,2 +1,3 @@
 class List < ApplicationRecord
-end
+    validates :title, :desc, presence: true
+  end
