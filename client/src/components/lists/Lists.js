@@ -22,12 +22,20 @@ const Lists = () => {
     axios.put(`/api/lists/${id}`, { list })
       .then( res => {
         const newUpdatedLists = lists.map( l => {
-          if (l.id === id) {
+          if (l.id == id) {
             return res.data
           }
           return l
         })
         setLists(newUpdatedLists)
+      })
+      .catch( err => console.log(err))
+  }
+
+  const deleteList = (id) => {
+    axios.delete(`/api/lists/${id}`)
+      .then( res => {
+        setLists(lists.filter( l => l.id !== id))
       })
       .catch( err => console.log(err))
   }
@@ -39,6 +47,7 @@ const Lists = () => {
       <AllList 
         lists={lists}
         updateList={updateList}
+        deleteList={deleteList}
       />
     </>
   )
